@@ -1,0 +1,44 @@
+<h1>DragonBall Page</h1>
+<hr />
+
+<section class="row">
+  <div class="col-12 col-sm-6">
+    <h3>Agregar:</h3>
+    <input type="text" class="form-control" placeholder="Nombre" />
+    <input type="number" class="form-control mt-2" placeholder="Poder" />
+    <button class="btn btn-primary mt-2">Agregar</button>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <h3>Listado Fuertes</h3>
+    <ul>
+      @for (character of characters(); track character.id; let i = $index) { @if
+      (character.power > 1000) {
+      <li>
+        {{ i + 1 }} -
+        <span>{{ character.name }}</span>
+
+        <template>
+          <!-- <strong [class]="character.power > 9000 ? 'text-danger' : ''"> -->
+          <!-- Se debe importar la directiva 'ngClass' -->
+          <!-- <strong [ngClass]="{ 'text-danger': character.power > 9000 }"> -->
+          <!-- Usamos una signal computada para devolver una clase de forma condicional -->
+          <!-- <strong [ngClass]="powerClasses()"> -->
+          <!-- Se asigna la clase [class.className] si se cumple la condicion -->
+        </template>
+
+        <strong
+          [class.text-danger]="character.power > 9000"
+          [class.text-primary]="character.power <= 9000"
+        >
+          ({{ character.power }})
+        </strong>
+      </li>
+      } @else {
+      <li>
+        <strong>Aqui no hay nada!</strong>
+      </li>
+      } }
+    </ul>
+  </div>
+</section>
